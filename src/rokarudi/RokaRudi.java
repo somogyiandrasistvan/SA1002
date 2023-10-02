@@ -15,7 +15,7 @@ public class RokaRudi {
         kiiras(tomb);
         int szam = bekeres();
         kever(tomb, szam);
-        kiiras(tomb);
+        ezVolt(tomb);
     }
 
     private static String[] feltoltes() {
@@ -59,15 +59,16 @@ public class RokaRudi {
     }
 
     private static void kever(String tomb[], int szam) {
-        String ujTomb[] = new String[22];
+        String ujTomb[] = new String[24];
         if (szam == 1) {
-            for (int i = 1; i < 7; i++) {
+            for (int i = 1; i < ujTomb.length; i++) {
                 ujTomb[i] = tomb[20 - (i - 1) * 3];
+                ujTomb[i+6] = tomb[19 - (i - 1) * 3];
+                ujTomb[i+13] = tomb[21 - (i - 1) * 3];
             }
         }
         if (szam == 2) {
             for (int i = 7; i < 14; i++) {
-                ujTomb[i] = tomb[19 - (i - 1) * 3];
             }
         } else {
             for (int i = 14; i < 21; i++) {
@@ -79,7 +80,7 @@ public class RokaRudi {
         }
     }
 
-    private static void kiiras(String tomb[]) {
+    private static void ezVolt(String tomb[]) {
         System.out.println("A gondolt lap: " + tomb[11]);
     }
 
