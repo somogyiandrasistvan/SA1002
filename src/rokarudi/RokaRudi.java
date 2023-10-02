@@ -12,21 +12,23 @@ public class RokaRudi {
 
     private static void feladat() {
         String tomb[] = feltoltes();
-        kiiras(tomb);
-        int szam = bekeres();
-        kever(tomb, szam);
+        for (int i = 0; i < 3; i++) {
+            kiiras(tomb);
+            int szam = bekeres();
+            kever(tomb, szam);
+        }
         ezVolt(tomb);
     }
 
     private static String[] feltoltes() {
         String tomb[] = new String[22];
         String jelek[] = {"SZ", "M", "T", "L"};
-        String szamok[] = {"K", "ÁSZ", "X", "IX", "VIII"};
+        String szamok[] = {"K", "N", "ÁSZ", "X", "IX", "VIII"};
 
         int index = 1;
         for (int i = 0; i < jelek.length; i++) {
-            for (int j = 0; j < szamok.length; j++) {
-                tomb[index++] = jelek[i] + " " + szamok[j];
+            for (int j = 0; j < szamok.length & index <= 21; j++) {
+                tomb[index++] = jelek[i] + "_" + szamok[j];
             }
         }
         return tomb;
@@ -58,26 +60,33 @@ public class RokaRudi {
         return szam;
     }
 
-    private static void kever(String tomb[], int szam) {
-        String ujTomb[] = new String[24];
+    private static String[] kever(String tomb[], int szam) {
+        String ujTomb[] = new String[tomb.length];
         if (szam == 1) {
-            for (int i = 1; i < ujTomb.length; i++) {
+            for (int i = 1; i < 7; i++) {
                 ujTomb[i] = tomb[20 - (i - 1) * 3];
-                ujTomb[i+6] = tomb[19 - (i - 1) * 3];
-                ujTomb[i+13] = tomb[21 - (i - 1) * 3];
+                ujTomb[i + 7] = tomb[19 - (i - 1) * 3];
+                ujTomb[i + 14] = tomb[21 - (i - 1) * 3];
             }
         }
         if (szam == 2) {
-            for (int i = 7; i < 14; i++) {
+            for (int i = 1; i < 7; i++) {
+                ujTomb[i] = tomb[19 - (i - 1) * 3];
+                ujTomb[i + 7] = tomb[20 - (i - 1) * 3];
+                ujTomb[i + 14] = tomb[21 - (i - 1) * 3];
             }
-        } else {
-            for (int i = 14; i < 21; i++) {
+        }
+        if (szam == 3) {
+            for (int i = 1; i < 7; i++) {
                 ujTomb[i] = tomb[21 - (i - 1) * 3];
+                ujTomb[i + 7] = tomb[19 - (i - 1) * 3];
+                ujTomb[i + 14] = tomb[20 - (i - 1) * 3];
             }
         }
         for (int i = 1; i < tomb.length; i++) {
             tomb[i] = ujTomb[i];
         }
+        return ujTomb;
     }
 
     private static void ezVolt(String tomb[]) {
